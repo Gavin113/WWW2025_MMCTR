@@ -1,0 +1,194 @@
+Base:
+    model_root: './checkpoints/'
+    num_workers: 3
+    verbose: 1
+    early_stop_patience: 10
+    pickle_feature_encoder: True
+    save_best_only: True
+    eval_steps: null
+    debug_mode: False
+    group_id: user_id
+    use_features: null
+    feature_specs: null
+    feature_config: null
+
+DIN_att0: # This is a config template
+    model: DIN_att
+    dataset_id: MicroLens_1M_x1
+    loss: 'binary_crossentropy'
+    metrics: [AUC, logloss]
+    task: binary_classification
+    optimizer: adam
+    learning_rate: 1.0e-3
+    embedding_regularizer: 0
+    net_regularizer: 0
+    batch_size: 4096
+    embedding_dim: 64
+    dnn_hidden_units: [1024, 512, 256]
+    dnn_activations: ReLU
+    attention_hidden_units: [512, 256]
+    attention_hidden_activations: ReLU
+    attention_output_activation: null
+    attention_dropout: 0.1
+    din_use_softmax: False
+    net_dropout: 0
+    batch_norm: True
+    epochs: 100
+    shuffle: True
+    seed: 20242025
+    monitor: "AUC"
+    monitor_mode: 'max'
+    max_len: 64
+    accumulation_steps: 1
+
+DIN_att2: # This is a config template
+    model: DIN_att2
+    dataset_id: MicroLens_1M_x1
+    loss: 'binary_crossentropy'
+    metrics: [AUC, logloss]
+    task: binary_classification
+    optimizer: adam
+    learning_rate: 1.0e-3
+    embedding_regularizer: 0
+    net_regularizer: 0
+    batch_size: 4096
+    embedding_dim: 64
+    dnn_hidden_units: [1024, 512, 256]
+    dnn_activations: ReLU
+    attention_hidden_units: [512, 256]
+    attention_hidden_activations: ReLU
+    attention_output_activation: null
+    attention_dropout: 0.1
+    din_use_softmax: False
+    net_dropout: 0
+    batch_norm: True
+    epochs: 100
+    shuffle: True
+    seed: 20242025
+    monitor: "AUC"
+    monitor_mode: 'max'
+    max_len: 64
+    accumulation_steps: 1
+
+
+DIN_att3: # This is a config template
+    model: DIN_att3
+    dataset_id: MicroLens_1M_x1
+    loss: 'binary_crossentropy'
+    metrics: [AUC, logloss]
+    task: binary_classification
+    optimizer: adam
+    learning_rate: 1.0e-3
+    embedding_regularizer: 0
+    net_regularizer: 0
+    batch_size: 4096
+    embedding_dim: 64
+    dnn_hidden_units: [1024, 512, 256]
+    dnn_activations: ReLU
+    attention_hidden_units: [512, 256]
+    attention_hidden_activations: ReLU
+    attention_output_activation: null
+    attention_dropout: 0.1
+    din_use_softmax: True
+    net_dropout: 0
+    batch_norm: True
+    epochs: 100
+    shuffle: True
+    seed: 2026
+    monitor: "AUC"
+    monitor_mode: 'max'
+    max_len: 64
+    accumulation_steps: 1
+
+DIN_att4: # 将like_levels和view_levels加入到了历史序列中,是否先对历史序列做self_attention
+    model: DIN_att4
+    dataset_id: MicroLens_1M_x1
+    loss: 'binary_crossentropy'
+    metrics: [AUC, logloss]
+    task: binary_classification
+    optimizer: adam
+    learning_rate: 1.0e-3
+    embedding_regularizer: 0
+    net_regularizer: 0
+    batch_size: 4096
+    embedding_dim: 64
+    dnn_hidden_units: [1024, 512, 256]
+    dnn_activations: ReLU
+    attention_hidden_units: [512, 256]
+    attention_hidden_activations: ReLU
+    attention_output_activation: null
+    attention_dropout: 0.1
+    din_use_softmax: True
+    net_dropout: 0
+    batch_norm: True
+    epochs: 100
+    shuffle: True
+    seed: 2026
+    monitor: "AUC"
+    monitor_mode: 'max'
+    max_len: 64
+    accumulation_steps: 1
+    if_use_self_attn: True # 是否先对历史序列做self_attention
+    num_layers: 2
+
+DIN_att5: # 加入了user_id
+    model: DIN_att5
+    dataset_id: MicroLens_1M_x1
+    loss: 'binary_crossentropy'
+    metrics: [AUC, logloss]
+    task: binary_classification
+    optimizer: adam
+    learning_rate: 1.0e-3
+    embedding_regularizer: 0
+    net_regularizer: 0
+    batch_size: 4096
+    embedding_dim: 64
+    dnn_hidden_units: [1024, 512, 256]
+    dnn_activations: ReLU
+    attention_hidden_units: [512, 256]
+    attention_hidden_activations: ReLU
+    attention_output_activation: null
+    attention_dropout: 0.1
+    din_use_softmax: False
+    net_dropout: 0
+    batch_norm: True
+    epochs: 100
+    shuffle: True
+    seed: 2026
+    monitor: "AUC"
+    monitor_mode: 'max'
+    max_len: 64
+    accumulation_steps: 1
+    if_use_self_attn: False
+    num_layers: 2
+
+DIN_att6: # 加入了user_id,RMSnorm
+    model: DIN_att6
+    dataset_id: MicroLens_1M_x1
+    loss: 'binary_crossentropy'
+    metrics: [AUC, logloss]
+    task: binary_classification
+    optimizer: adam
+    learning_rate: 1.0e-3
+    embedding_regularizer: 0
+    net_regularizer: 0
+    batch_size: 4096
+    embedding_dim: 64
+    dnn_hidden_units: [1024, 512, 256]
+    dnn_activations: ReLU
+    attention_hidden_units: [512, 256]
+    attention_hidden_activations: ReLU
+    attention_output_activation: null
+    attention_dropout: 0.1
+    din_use_softmax: False
+    net_dropout: 0
+    batch_norm: True
+    epochs: 100
+    shuffle: True
+    seed: 2026
+    monitor: "AUC"
+    monitor_mode: 'max'
+    max_len: 64
+    accumulation_steps: 1
+    if_use_self_attn: False
+    num_layers: 2

@@ -1,0 +1,14 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+data/
+checkpoints/
+submission/
+DIN_att6.csv
+checkpoints/MicroLens_1M_x1/DIN_att6_004_f34c14ed.model
+*.model
+*.csv
