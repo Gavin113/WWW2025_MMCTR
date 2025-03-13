@@ -47,7 +47,7 @@ item_info_v3.parquet contains 5 columns: {item_id, item_tags, item_emb_d128, lik
 1. Train the model on train and validation sets:
 The main model : src/DIN_att6.py
 
-The best.yaml is the best hyperparameter configuration found by the hyperparameter tuner, only 2 epoch training we can get the best performance.
+The best.yaml is the best hyperparameter configuration found by the hyperparameter tuner.
 ```
     embedding_regularizer: 1.0e-07  
     net_regularizer: 0.01
