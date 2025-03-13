@@ -30,5 +30,5 @@ tuner_space:
     if_use_self_attn: false
     num_layers: 2
     dnn_hidden_units: [[1024, 512, 256, 64, 16]]
-    seed: 21
+    seed: 29
     

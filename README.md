@@ -57,23 +57,23 @@ The best.yaml is the best hyperparameter configuration found by the hyperparamet
     if_use_self_attn: False
     num_layers: 2
     dnn_hidden_units: [[1024, 512, 256, 64, 16]]
-    seed: 21
+    seed: 29
 ```
 
 ```
 python run_param_tuner.py --config config/best.yaml --gpu 0
 ```
 
-    The best performance: [exp_id] DIN_att6_001_ff34d5a9  [val] AUC: 0.985013 - logloss: 0.115100
-    Test Dataset  AUC: 0.988259  Leaderboard Rank: 1
+    The best performance: [exp_id] DIN_att6_001_fc484edf  [val] AUC: 0.985333 - logloss: 0.148664
+    Test Dataset  AUC: 0.9887  Leaderboard Rank: 1
 
 2. Make predictions on the test set:
 ```
-python prediction.py --config config/best --expid DIN_att6_001_ff34d5a9 --gpu 0
+python prediction.py --config config/best --expid DIN_att6_001_fc484edf --gpu 0
 ```
     
 3. Submit the best prediction results to the competition:
- - submission/DIN_att6_001_ff34d5a9.zip
+ - submission/DIN_att6_001_fc484edf.zip
 
 ### Environment
 We run the experiments on a 4090 GPU server with 24G GPU memory.
