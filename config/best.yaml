@@ -9,7 +9,7 @@ dataset_config:
         train_data: ./data/MicroLens_1M_x1/train.parquet
         valid_data: ./data/MicroLens_1M_x1/valid.parquet
         test_data: ./data/MicroLens_1M_x1/test.parquet
-        item_info: ./data/MicroLens_1M_x1/item_info_v3.parquet   # item_emb_d128_v3,likes_level, views_level
+        item_info: ./data/MicroLens_1M_x1/item_info.parquet   # item_emb_d128
         rebuild_dataset: False
         feature_cols: 
             - {name: user_id, active: True, dtype: int, type: categorical, vocab_size: 1000001}     # user_id也做embedding

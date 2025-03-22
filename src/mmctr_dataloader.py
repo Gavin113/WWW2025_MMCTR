@@ -18,6 +18,7 @@ import numpy as np
 from torch.utils.data import Dataset, DataLoader
 from torch.utils.data.dataloader import default_collate
 import pandas as pd
+import polars as pl
 import torch
 
 
@@ -72,6 +73,14 @@ class BatchCollator(object):
     def __init__(self, feature_map, max_len, column_index, item_info,):
         self.feature_map = feature_map
         self.item_info = pd.read_parquet(item_info)
+        item_like_vilel_level= pd.read_parquet('./data/item_feature.parquet',columns=["item_id", "likes_level", "views_level"])
+
+        item_0 = pd.DataFrame({
+        "item_id": 0,
+        "likes_level": 0,   
+        "views_level": 0  
+        }, index=[0])
+        self.item_like_vilel_level  = pd.concat([item_0, item_like_vilel_level],ignore_index=True)
         # self.item_feature_info=pd.read_parquet('./data/MicroLens_1M_x1/item_info_new.parquet')
         self.max_len = max_len
         self.column_index = column_index
@@ -91,14 +100,18 @@ class BatchCollator(object):
         del batch_dict["item_id"]   # 删除了user端batch_dict里的"item_id"，实际用户历史交互的item_id和候选物品的item_id集成到了batch_items里
         batch_items = np.hstack([batch_seqs.numpy(), item_index]).flatten() # [batch_size,64] + [batch_size ,1] -> [batch_size,65]-> [batch_size*65]
         item_info = self.item_info.iloc[batch_items]   # 提取user的item_seq和候选item_id,fatten()为1维，然后再将其作为item_id映射其对应的item_tags与item_emb
-        item_dict = dict()  # 包含了用户的item_seq和候选item_id的item_id,item_tags,item_emb
+        item_dict = dict()  
+        
+        item_likes_views = self.item_like_vilel_level.iloc[batch_items]  # user_id 的likes_level和views_level
+        
         for col in item_info.columns:
             if col in all_cols:
                 item_dict[col] = torch.from_numpy(np.array(item_info[col].to_list()))
-        # 这里item_dict里包含了likes_level和views_level的信息
     
-        # batch_dict:{'user_id':[b]   , 'likes_level':[b] , 'views_level':[b] }
-        # item_dict:{'item_id':[b*65] , 'item_tags':[b*65] ,  'item_emb_d128':[b*65,128], 'likes_level':[b*65], 'views_level':[b*65]}
+        for col in ["likes_level","views_level"]:    # 构建历史序列的likes_level和views_level
+            item_dict[col] = torch.from_numpy(np.array(item_likes_views[col].to_list()))
+    
+    
         return batch_dict, item_dict, mask
     
     

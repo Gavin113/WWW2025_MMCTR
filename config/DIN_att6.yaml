@@ -9,7 +9,7 @@ dataset_config:
         train_data: ./data/MicroLens_1M_x1/train.parquet
         valid_data: ./data/MicroLens_1M_x1/valid.parquet
         test_data: ./data/MicroLens_1M_x1/test.parquet
-        item_info: ./data/MicroLens_1M_x1/item_info_v3.parquet
+        item_info: ./data/MicroLens_1M_x1/item_info.parquet
         rebuild_dataset: False
         feature_cols:
             - {name: user_id, active: True, dtype: int, type: categorical, vocab_size: 1000001}
@@ -22,14 +22,14 @@ dataset_config:
         label_col: {name: label, dtype: float}
 
 tuner_space:
-    embedding_regularizer: [1.e-7,1.e-6,1.e-8]    # 对嵌入层（Embedding）进行L1/L2正则化约束特征嵌入层（Feature Embedding）进行L1/L2正则化约束
-    net_regularizer: [0.01,0.05]   # 对深度网络层（MLP等）的权重进行正则化约束
-    net_dropout: [0.1,0.2]   # dropout概率 
+    embedding_regularizer: [1.e-7]    # 对嵌入层（Embedding）进行L1/L2正则化约束特征嵌入层（Feature Embedding）进行L1/L2正则化约束
+    net_regularizer: [0.01]   # 对深度网络层（MLP等）的权重进行正则化约束
+    net_dropout: 0.1  # dropout概率 
     learning_rate: 1.e-3  # 学习率
     batch_size: 4096
     if_use_self_attn: False
     num_layers: 2
     dnn_hidden_units: [[1024, 512, 256, 64, 16]]
-    seed: 29
+    seed: [29]
     early_stop_patience: 5
     

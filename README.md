@@ -16,7 +16,7 @@ sh run.sh
 ```
 python combine_item.py
 ```
-Use **item_emb_d128_v3** in item_emb.parquet as 128-d item embeddings,  add **likes_level** and **views_level** in item_feature.parquet as item features, saved in ./MicroLens_1M_x1/item_info_v3.parquet.
+Use **item_emb_d128_v3** in item_emb.parquet as 128-d item embeddings, saved in ./MicroLens_1M_x1/item_info.parquet.
 ```
 .data/MicroLens_1M_x1
     ./MicroLens_1M_x1
@@ -29,17 +29,7 @@ Use **item_emb_d128_v3** in item_emb.parquet as 128-d item embeddings,  add **li
     ./item_emb.parquet    
 ```
 
-item_info_v3.parquet contains 5 columns: {item_id, item_tags, item_emb_d128, likes_level, views_level}, as shown below:
-```
-┌─────────┬───────────────┬─────────────────────────────────┬─────────────┬─────────────┐
-│ item_id ┆ item_tags     ┆ item_emb_d128                   ┆ likes_level ┆ views_level │
-│ ---     ┆ ---           ┆ ---                             ┆ ---         ┆ ---         │
-│ i64     ┆ array[i64, 5] ┆ array[f32, 128]                 ┆ i64         ┆ i64         │
-╞═════════╪═══════════════╪═════════════════════════════════╪═════════════╪═════════════╡
-│ 0       ┆ [0, 0, … 0]   ┆ [0.0, 0.0, … 0.0]               ┆ 0           ┆ 0           │
-│ 1       ┆ [0, 0, … 1]   ┆ [-0.587753, -0.38462, … -0.19…] ┆ 7           ┆ 2           │
-│ 2       ┆ [0, 0, … 4]   ┆ [-2.505449, 1.56058, … 0.0067…] ┆ 5           ┆ 9           │
-└─────────┴───────────────┴─────────────────────────────────┴─────────────┴─────────────┘
+
 ```
 
 ### How to Run
@@ -65,7 +55,7 @@ python run_param_tuner.py --config config/best.yaml --gpu 0
 ```
 
     The best performance: [exp_id] DIN_att6_001_fc484edf  [val] AUC: 0.985333 - logloss: 0.148664
-    Test Dataset  AUC: 0.9887  Leaderboard Rank: 1
+    Test Dataset  AUC: 0.9887  Leaderboard Rank: 2
 
 2. Make predictions on the test set:
 ```
